@@ -20,6 +20,20 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
+# Build component manager client
+add_executable(component_manager_client
+  src/component_manager_client.cpp
+)
+
+add_dependencies(component_manager_client 
+  ${catkin_EXPORTED_TARGETS}
+  ${${PROJECT_NAME}_EXPORTED_TARGETS}
+)
+
+target_link_libraries(component_manager_client 
+  ${catkin_LIBRARIES}
+)
+
 # component_string_0
 add_executable(component_string_0
   src/component_string_0.cpp
@@ -69,7 +83,6 @@ add_dependencies(process_manager_client
 target_link_libraries(process_manager_client 
   ${catkin_LIBRARIES}
 )
-
 
 # Robot Manager Node
 add_executable(rmi_command_robot

@@ -14,14 +14,15 @@ int main(int argc, char** argv)
   temoto_robot_manager::RobotManagerInterface rmi_;
   rmi_.initialize();
 
-  // // Initialize the robot  
-  std::string robot_name = "vaultbot_sim";    // Robot name defined on the robot_description
+  // // Initialize the robot
+  // Robot name defined on the robot_description
+  std::string robot_name = "vaultbot_sim";    
   rmi_.loadRobot(robot_name);
 
   /*
   *  Navigation 
   */
-  // Define a navigation goal 2D pose  
+  // Define a navigation goal - 2D pose  
   geometry_msgs::PoseStamped target_pose;
   target_pose.pose.position.x = -3.0;
   target_pose.pose.position.y = 1.0;
@@ -49,11 +50,13 @@ int main(int argc, char** argv)
   /*
   *  Manipulation 
   */
+  // Get current pose of the end effector
   TEMOTO_INFO_STREAM_("Current pose");
   geometry_msgs::PoseStamped eef_pose;
   eef_pose.pose = rmi_.getEndEffPose(robot_name);
   std::cout << eef_pose.pose.position.x << eef_pose.pose.position.y << eef_pose.pose.position.z << std::endl;
 
+  // Create a target pose
   TEMOTO_INFO_STREAM_("Shift manipulation target pose");
   target_pose.pose.position.x = eef_pose.pose.position.x + 0.3;
   target_pose.pose.position.y = eef_pose.pose.position.y;

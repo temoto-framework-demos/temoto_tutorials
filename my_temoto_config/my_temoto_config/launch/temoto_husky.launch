@@ -1,5 +1,5 @@
 <launch>
-  <arg name="temoto_namespace" default="vaultbot"/>
+  <arg name="temoto_namespace" default="my_temoto_config"/>
   <env name="TEMOTO_NAMESPACE" value="$(arg temoto_namespace)" />
   
   <arg name="extra_wake_words" default="everybody"/>
