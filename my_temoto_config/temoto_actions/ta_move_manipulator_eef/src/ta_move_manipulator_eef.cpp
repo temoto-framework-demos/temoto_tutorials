@@ -45,7 +45,7 @@ void initializeTemotoAction()
 void executeTemotoAction()
 {  
   geometry_msgs::PoseStamped target_pose;
-
+  target_pose.header.frame_id = "base_link";
   target_pose.pose.position.x = in_param_pose_quat_position_x;
   target_pose.pose.position.y = in_param_pose_quat_position_y;
   target_pose.pose.position.z = in_param_pose_quat_position_z;

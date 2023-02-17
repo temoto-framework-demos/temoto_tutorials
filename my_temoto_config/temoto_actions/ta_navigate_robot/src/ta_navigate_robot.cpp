@@ -41,6 +41,7 @@ void executeTemotoAction()
    * Move the robot
    */
   geometry_msgs::PoseStamped target_pose;
+  target_pose.header.frame_id = "map";
   target_pose.pose.position.x = in_param_pose_2d_x;
   target_pose.pose.position.y = in_param_pose_2d_y;
   target_pose.pose.orientation = tf::createQuaternionMsgFromRollPitchYaw(0, 0, in_param_pose_2d_yaw);
@@ -50,8 +51,7 @@ void executeTemotoAction()
   try
   {
     TEMOTO_INFO_STREAM_("Sending a navigation goal to " << in_param_robot_name << " ...");
-    rmi_.navigationGoal(in_param_robot_name, "map", target_pose);
-
+    rmi_.navigationGoal(in_param_robot_name, target_pose);
     TEMOTO_INFO_STREAM_("Done navigating");
     goal_reached = true;
   }

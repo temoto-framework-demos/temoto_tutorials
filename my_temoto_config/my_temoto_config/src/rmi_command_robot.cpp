@@ -24,6 +24,7 @@ int main(int argc, char** argv)
   */
   // Define a navigation goal - 2D pose  
   geometry_msgs::PoseStamped target_pose;
+  target_pose.header.frame_id = "map";
   target_pose.pose.position.x = -3.0;
   target_pose.pose.position.y = 1.0;
   target_pose.pose.orientation.x = 0.0;
@@ -37,7 +38,7 @@ int main(int argc, char** argv)
   try
   {
     TEMOTO_INFO_STREAM_("Sending a navigation goal to " << robot_name << " ...");
-    rmi_.navigationGoal(robot_name, "map", target_pose);
+    rmi_.navigationGoal(robot_name, target_pose);
 
     TEMOTO_INFO_STREAM_("Done navigating");
     goal_reached = true;
@@ -53,22 +54,27 @@ int main(int argc, char** argv)
   // Get current pose of the end effector
   TEMOTO_INFO_STREAM_("Current pose");
   geometry_msgs::PoseStamped eef_pose;
-  eef_pose.pose = rmi_.getEndEffPose(robot_name);
+  eef_pose = rmi_.getEndEffPose(robot_name, "r_arm");
   std::cout << eef_pose.pose.position.x << eef_pose.pose.position.y << eef_pose.pose.position.z << std::endl;
+  std::cout << "target_frame: " << eef_pose.header.frame_id << std::endl;
 
   // Create a target pose
-  TEMOTO_INFO_STREAM_("Shift manipulation target pose");
-  target_pose.pose.position.x = eef_pose.pose.position.x + 0.3;
-  target_pose.pose.position.y = eef_pose.pose.position.y;
-  target_pose.pose.position.z = eef_pose.pose.position.z + 0.2;
-
-  target_pose.pose.orientation = eef_pose.pose.orientation;  
-
-  rmi_.planManipulation(robot_name, "r_arm", target_pose);  
+  TEMOTO_INFO_STREAM_("Change manipulation target pose");
+  geometry_msgs::PoseStamped manip_target_pose;
+  manip_target_pose.header.frame_id = "base_link";
+  manip_target_pose.pose.position.x = 0.570;
+  manip_target_pose.pose.position.y = -0.720;
+  manip_target_pose.pose.position.z = 0.711;
+  manip_target_pose.pose.orientation.x = -0.514;
+  manip_target_pose.pose.orientation.y = 0.767;
+  manip_target_pose.pose.orientation.z = -0.342;
+  manip_target_pose.pose.orientation.w = -0.175;
+  
+  rmi_.planManipulation(robot_name, "r_arm", manip_target_pose);
   rmi_.executePlan(robot_name);
 
   TEMOTO_INFO_STREAM_("New pose");
-  eef_pose.pose = rmi_.getEndEffPose(robot_name);
+  eef_pose = rmi_.getEndEffPose(robot_name, "r_arm");
   std::cout << eef_pose.pose.position.x << eef_pose.pose.position.y << eef_pose.pose.position.z << std::endl;
 
   /*
