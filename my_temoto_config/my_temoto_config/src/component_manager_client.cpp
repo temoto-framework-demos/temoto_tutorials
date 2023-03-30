@@ -36,7 +36,7 @@ int main(int argc, char** argv)
     ROS_INFO_STREAM("* " << topic.first << ": " << topic.second);
   }
 
-  ros::Duration(15).sleep();
+  ros::Duration(30).sleep();
 
   ROS_INFO("Unloading 2d_camera");
   cmi.stopComponent("2d_camera", "", "");

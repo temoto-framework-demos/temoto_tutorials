@@ -38,11 +38,12 @@ void executeTemotoAction()
 
   TEMOTO_INFO_STREAM("loading " << in_param_robot_name << "...");
   rmi_.loadRobot(in_param_robot_name);
-  TEMOTO_INFO_STREAM(in_param_robot_name << " initialized");
 
   TEMOTO_INFO_STREAM("trying to get config of '" << in_param_robot_name << "' ...");
   YAML::Node robot_config = rmi_.getRobotConfig(in_param_robot_name);
   TEMOTO_INFO_STREAM("Config of robot '" << in_param_robot_name << "': " << robot_config);
+
+  TEMOTO_INFO_STREAM(in_param_robot_name << " initialized");
 }
 
 // Default Constructor (REQUIRED)
