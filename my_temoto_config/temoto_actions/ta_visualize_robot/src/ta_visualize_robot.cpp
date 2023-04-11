@@ -18,13 +18,13 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #include <class_loader/class_loader.hpp>
-#include "ta_initialize_robot/temoto_action.h"
-#include "temoto_robot_manager/robot_manager_interface.h"
+#include "ta_visualize_robot/temoto_action.h"
+#include "temoto_visualization_manager/visualization_manager_interface.h"
 
 /* 
- * ACTION IMPLEMENTATION of TaInitializeRobot 
+ * ACTION IMPLEMENTATION of TaVisualizeRobot 
  */
-class TaInitializeRobot : public TemotoAction
+class TaVisualizeRobot : public TemotoAction
 {
 public:
 
@@ -42,26 +42,16 @@ void initializeTemotoAction()
 void executeTemotoAction()
 {
   getInputParameters();
-  rmi_.initialize();
+  vmi_.initialize();
 
-  TEMOTO_INFO_STREAM("loading " << in_param_robot_name << "...");
-  rmi_.loadRobot(in_param_robot_name);
-
-  TEMOTO_INFO_STREAM("trying to get config of '" << in_param_robot_name << "' ...");
-  YAML::Node robot_config = rmi_.getRobotConfig(in_param_robot_name);
-  TEMOTO_INFO_STREAM("Config of robot '" << in_param_robot_name << "': " << robot_config);
-
-  out_param_robot_name = in_param_robot_name;
-  out_param_robot_description = "/" + robot_config["robot_absolute_namespace"].as<std::string>()
-    + "/robot_description";
-
-  TEMOTO_INFO_STREAM(in_param_robot_name << " initialized");
-
-  setOutputParameters();
+  TEMOTO_INFO_STREAM("Showing robot '" << in_param_robot_name << "' in RViz ...");
+  std::string robot_description_rviz_config = "{Robot Description: " + in_param_robot_description + "}";
+  vmi_.loadRvizPlugin("rviz/RobotModel", "", robot_description_rviz_config, in_param_robot_name + " model");
+  TEMOTO_INFO_STREAM("Robot '" << in_param_robot_name << "' visualized");
 }
 
 // Destructor
-~TaInitializeRobot()
+~TaVisualizeRobot()
 {
   TEMOTO_INFO("Action instance destructed");
 }
@@ -70,30 +60,21 @@ void executeTemotoAction()
 void getInputParameters()
 {
   in_param_robot_name = GET_PARAMETER("robot_name", std::string);
-}
-
-// Sets the output parameters which can be passed to other actions
-void setOutputParameters()
-{
-  SET_PARAMETER("robot_name", "string", out_param_robot_name);
-  SET_PARAMETER("robot_description", "string", out_param_robot_description);
+  in_param_robot_description = GET_PARAMETER("robot_description", std::string);
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
  * Class members
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-temoto_robot_manager::RobotManagerInterface rmi_;
+temoto_visualization_manager::VisualizationManagerInterface vmi_;
 
 // Declaration of input parameters
 std::string in_param_robot_name;
-
-// Declaration of output parameters
-std::string out_param_robot_name;
-std::string out_param_robot_description;
+std::string in_param_robot_description;
 
 
-}; // TaInitializeRobot class
+}; // TaVisualizeRobot class
 
 /* REQUIRED BY CLASS LOADER */
-CLASS_LOADER_REGISTER_CLASS(TaInitializeRobot, ActionBase);
+CLASS_LOADER_REGISTER_CLASS(TaVisualizeRobot, ActionBase);

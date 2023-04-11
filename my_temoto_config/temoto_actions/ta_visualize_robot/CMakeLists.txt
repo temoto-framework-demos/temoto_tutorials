@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(ta_initialize_robot)
+project(ta_visualize_robot)
 
 # use c++14 standard
 add_compile_options(-std=c++14)
@@ -17,7 +17,7 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   temoto_action_engine
   temoto_core
-  temoto_robot_manager
+  temoto_visualization_manager
 )
 
 catkin_package()

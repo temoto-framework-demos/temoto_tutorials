@@ -1,6 +1,6 @@
 
-#ifndef ta_initialize_robot_TEMOTO_ACTION_H
-#define ta_initialize_robot_TEMOTO_ACTION_H
+#ifndef ta_visualize_robot_TEMOTO_ACTION_H
+#define ta_visualize_robot_TEMOTO_ACTION_H
 
 /* REQUIRED BY TEMOTO */
 #include "temoto_core/common/base_subsystem.h"

@@ -22,6 +22,9 @@
 #include "temoto_robot_manager/robot_manager_interface.h"
 #include "tf/tf.h"
 
+#include <chrono>
+#include <thread>
+
 /* 
  * ACTION IMPLEMENTATION of TaNavigateRobot 
  */
@@ -46,8 +49,10 @@ void executeTemotoAction()
   target_pose.pose.position.y = in_param_pose_2d_y;
   target_pose.pose.orientation = tf::createQuaternionMsgFromRollPitchYaw(0, 0, in_param_pose_2d_yaw);
 
-  bool goal_reached = false;
-  while (!goal_reached && actionOk())
+  bool goal_reached{false};
+  unsigned int retry_count{0};
+
+  while (!goal_reached && actionOk() && retry_count < 3)
   try
   {
     TEMOTO_INFO_STREAM_("Sending a navigation goal to " << in_param_robot_name << " ...");
@@ -58,6 +63,14 @@ void executeTemotoAction()
   catch(const resource_registrar::TemotoErrorStack &e)
   {
     TEMOTO_WARN_STREAM_("Caught an error: " << e.what() << "\nRequesting the same navigation goal again ... ");
+    retry_count++;
+    std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+  }
+
+  if (!goal_reached)
+  {
+    std::string msg = "Unable to navigate robot '" + in_param_robot_name + "'. Make sure it is initialized first";
+    throw CREATE_TEMOTO_ERROR(msg);
   }
 }
 
