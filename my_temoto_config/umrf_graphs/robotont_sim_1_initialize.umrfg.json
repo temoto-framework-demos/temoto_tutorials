@@ -1,5 +1,5 @@
 {
-    "graph_name": "initialize_robotont_sim_2",
+    "graph_name": "robotont_sim_1_initialize",
     "graph_description": "Initializes and visualizes a robot",
     "graph_state": 1,
     "umrf_actions": [
@@ -13,7 +13,7 @@
             "input_parameters": {
                 "robot_name": {
                     "pvf_type": "string",
-                    "pvf_value": "robotont_sim_2"
+                    "pvf_value": "robotont_sim_1"
                 }
             },
             "output_parameters": {

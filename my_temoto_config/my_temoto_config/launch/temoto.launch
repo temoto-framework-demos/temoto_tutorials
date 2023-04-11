@@ -37,6 +37,7 @@
           type="temoto_visualization_manager" 
           name="temoto_visualization_manager" 
           output="screen"
+          respawn="$(arg respawn_nodes)"
           args="--config-base-path $(arg viz_plugin_config_base_path)"/>
 
     <node name="temoto_action_engine" 
@@ -46,6 +47,6 @@
           respawn="$(arg respawn_nodes)"
           args="--wake-word $(arg temoto_namespace) 
                 --actions-path $(arg actions_path) 
-                --extra-wake-words $(arg extra_wake_words)" />
+                --extra-wake-words $(arg extra_wake_words)"/>
   </group>
 </launch>
