@@ -10,16 +10,16 @@ targets:
   -
     "$TEMOTO_NAMESPACE""
 
-# sleep 5
+sleep 5
 
-# rostopic pub -1 /broadcast_stop_umrf_graph temoto_action_engine/BroadcastStopUmrfGraph "umrf_graph_name: 'robotont_sim_1_initialize'
-# targets:
-#   -
-#     "$TEMOTO_NAMESPACE""
+rostopic pub -1 /broadcast_stop_umrf_graph temoto_action_engine/BroadcastStopUmrfGraph "umrf_graph_name: 'robotont_sim_1_initialize'
+targets:
+  -
+    "$TEMOTO_NAMESPACE""
 
-# sleep 5
+sleep 5
 
-# rostopic pub -1 /broadcast_stop_umrf_graph temoto_action_engine/BroadcastStopUmrfGraph "umrf_graph_name: 'robotont_sim_2_initialize'
-# targets:
-#   -
-#     "$TEMOTO_NAMESPACE""
+rostopic pub -1 /broadcast_stop_umrf_graph temoto_action_engine/BroadcastStopUmrfGraph "umrf_graph_name: 'robotont_sim_2_initialize'
+targets:
+  -
+    "$TEMOTO_NAMESPACE""

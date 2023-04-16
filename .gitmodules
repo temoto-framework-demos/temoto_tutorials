@@ -1,12 +1,15 @@
 [submodule "robotont/robotont_driver"]
-	path = robotont/robotont_driver
+	path = robot_support_pkgs/robotont/robotont_driver
 	url = https://github.com/robotont/robotont_driver
 [submodule "robotont/robotont_description"]
-	path = robotont/robotont_description
+	path = robot_support_pkgs/robotont/robotont_description
 	url = https://github.com/robotont/robotont_description
 [submodule "robotont/robotont_msgs"]
-	path = robotont/robotont_msgs
+	path = robot_support_pkgs/robotont/robotont_msgs
 	url = https://github.com/robotont/robotont_msgs
 [submodule "robotont/robotont_navigation"]
-	path = robotont/robotont_navigation
+	path = robot_support_pkgs/robotont/robotont_navigation
 	url = https://github.com/robotont/robotont_navigation
+[submodule "robot_support_pkgs/husky_dual_ur5"]
+	path = robot_support_pkgs/husky_dual_ur5
+	url = https://github.com/ut-ims-robotics/husky_dual_ur5
