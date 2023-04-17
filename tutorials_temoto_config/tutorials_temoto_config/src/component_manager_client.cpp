@@ -1,18 +1,17 @@
 #include "ros/ros.h"
 #include "temoto_component_manager/component_manager_interface.h"
 
-void resourceFailureCallback(temoto_component_manager::LoadComponent load_resource_msg, temoto_resource_registrar::Status status_msgs)
+void componentFailureCallback(temoto_component_manager::LoadComponent load_component_msg
+, temoto_resource_registrar::Status status_msgs)
 {
-  ROS_WARN_STREAM("The following resource stopped unexpectedly\n" << load_resource_msg.request);
+  ROS_WARN_STREAM("The following component stopped unexpectedly\n" << load_component_msg.request);
 }
 
 int main(int argc, char** argv)
 {
-  TEMOTO_LOG_ATTR.initialize("test_cm_client_node");
-  ros::init(argc, argv, TEMOTO_LOG_ATTR.getSubsystemName());
-  ros::AsyncSpinner spinner(4); // Use 4 threads
+  ros::init(argc, argv, "component_manager_client");
+  ros::AsyncSpinner spinner(4);
   spinner.start();
-  //ros::waitForShutdown();
 
   /*
    * Create Component Manager Interface object that provides a simplified
@@ -25,7 +24,7 @@ int main(int argc, char** argv)
   /*
    * You can register a custom routine (not required) where resource failures are reported.
    */
-  cmi.registerComponentStatusCallback(resourceFailureCallback);
+  cmi.registerComponentStatusCallback(componentFailureCallback);
 
   ROS_INFO("Loading 2d_camera");
   auto responded_topics = cmi.startComponent("2d_camera");
@@ -41,7 +40,5 @@ int main(int argc, char** argv)
   ROS_INFO("Unloading 2d_camera");
   cmi.stopComponent("2d_camera", "", "");
 
-  // ROS_INFO("Loading testpipe");
-  // //temoto_core::TopicContainer load_pipe_msg = cmi.startPipe("testpipe");
-  // ros::Duration(15).sleep();
+  return 0;
 }
