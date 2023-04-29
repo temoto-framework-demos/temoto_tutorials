@@ -11,7 +11,7 @@
   <env name="ROSCONSOLE_FORMAT" value="${message}" />
   <env name="ROSCONSOLE_CONFIG_FILE" value="$(find tutorials_temoto_config)/config/console.config" />
 
-  <group ns="$(arg temoto_namespace)/robot_manager/robots/vaultbot_sim">
+  <group ns="$(arg temoto_namespace)/vaultbot_sim">
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
       <arg name="world_name" value="$(find husky_dual_ur5_config)/worlds/clearpath_playpen.world"/>
       <arg name="paused" value="true"/>
