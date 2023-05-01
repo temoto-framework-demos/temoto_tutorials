@@ -1,0 +1,14 @@
+{
+    "graph_name": "ta_fabian_action",
+    "graph_description": "",
+    "graph_state": 1,
+    "umrf_actions": [
+        {
+            "name": "TaFabianAction",
+            "package_name": "ta_fabian_action",
+            "id": 0,
+            "state": 0,
+            "effect": "asynchronous"
+        }
+    ]
+}
