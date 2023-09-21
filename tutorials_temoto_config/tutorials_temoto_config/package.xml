@@ -36,12 +36,13 @@
 
   <buildtool_depend>catkin</buildtool_depend>
 
-  <depend>roscpp</depend>>
+  <depend>roscpp</depend>
   <depend>rospy</depend>
   <depend>temoto_action_assistant</depend>
   <depend>temoto_process_manager</depend>
   <depend>temoto_robot_manager</depend>
   <depend>temoto_component_manager</depend>  
+  <depend>move_base_msgs</depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>

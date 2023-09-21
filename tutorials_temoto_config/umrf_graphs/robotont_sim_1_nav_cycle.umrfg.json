@@ -58,11 +58,11 @@
                     },
                     "y": {
                         "pvf_type": "number",
-                        "pvf_value": 1
+                        "pvf_value": 1.0
                     },
                     "yaw": {
                         "pvf_type": "number",
-                        "pvf_value": 0.0
+                        "pvf_value": 0.5
                     }
                 },
                 "robot_name": {
@@ -102,7 +102,7 @@
                     },
                     "yaw": {
                         "pvf_type": "number",
-                        "pvf_value": 0.0
+                        "pvf_value": 0.1
                     }
                 },
                 "robot_name": {

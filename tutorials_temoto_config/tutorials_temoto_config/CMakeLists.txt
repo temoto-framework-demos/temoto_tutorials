@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8.3)
 project(tutorials_temoto_config)
 
 # use c++11 standard
-add_compile_options(-std=c++14)
+add_compile_options(-std=c++17)
 
 find_package(catkin REQUIRED COMPONENTS
   roscpp
@@ -96,4 +96,33 @@ add_dependencies(rmi_command_robot
 
 target_link_libraries(rmi_command_robot 
   ${catkin_LIBRARIES}
+)
+
+# Build rm_nav_test
+add_executable(rm_nav_test
+  src/rm_nav_test.cpp  
+)
+
+add_dependencies(rm_nav_test
+  ${catkin_EXPORTED_TARGETS} 
+  ${${PROJECT_NAME}_EXPORTED_TARGETS}
+)
+
+target_link_libraries(rm_nav_test
+  ${catkin_LIBRARIES}
+)
+
+add_library(my_navigation_feature SHARED
+  src/my_navigation_feature.cpp
+)
+
+target_link_libraries(my_navigation_feature
+  ${class_loader_LIBRARIES}
+)
+
+class_loader_hide_library_symbols(my_navigation_feature)
+
+install(TARGETS my_navigation_feature
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 )

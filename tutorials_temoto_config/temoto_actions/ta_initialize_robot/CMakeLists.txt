@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8.3)
 project(ta_initialize_robot)
 
 # use c++14 standard
-add_compile_options(-std=c++14)
+add_compile_options(-std=c++17)
 option(TEMOTO_ENABLE_TRACING "Use tracer" OFF)
 
 if(TEMOTO_ENABLE_TRACING)
