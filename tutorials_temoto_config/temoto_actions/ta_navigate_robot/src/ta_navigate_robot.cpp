@@ -56,6 +56,7 @@ void executeTemotoAction()
   temoto_robot_manager::RobotNavigationGoal navigation_request;
   navigation_request.request.robot_name = in_param_robot_name;
   navigation_request.request.target_pose = target_pose;
+  // navigation_request.request.priority = 3;
 
   bool goal_reached{false};
   unsigned int retry_count{0};

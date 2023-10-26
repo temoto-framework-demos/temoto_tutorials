@@ -56,17 +56,17 @@ bool sendGoal(RmNavigationGoal goal)
 
   if(ac_->getState() == actionlib::SimpleClientGoalState::SUCCEEDED)
   {
-    std::cout << "\033[1;33m Hooray, the base moved\033[0m\n" <<std::endl;
+    std::cout << "\033[1;33m The base moved\033[0m" <<std::endl;
     task_finished = true;
   }      
   else
   {
-    std::cout << "\033[1;33m The base failed to move for some reason\033[0m\n" <<std::endl;
+    std::cout << "\033[1;33m The base failed to move for some reason\033[0m" <<std::endl;
   }
       
   if (!task_finished)
   {
-    std::cout << "\033[1;33m could not finish the task\033[0m\n" << std::endl;    
+    std::cout << "\033[1;33m Base could not finish the task\033[0m" << std::endl;
     // return false;
   }
 
