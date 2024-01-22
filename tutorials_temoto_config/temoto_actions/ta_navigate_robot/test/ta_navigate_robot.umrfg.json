@@ -12,20 +12,20 @@
                 "pose_2d": {
                     "x": {
                         "pvf_type": "number",
-                        "pvf_value": 3.0
+                        "pvf_value": -1.0
                     },
                     "y": {
                         "pvf_type": "number",
-                        "pvf_value": 1.0
+                        "pvf_value": -1.0
                     },
                     "yaw": {
                         "pvf_type": "number",
-                        "pvf_value": 0.0
+                        "pvf_value": 1.57
                     }
                 },
                 "robot_name": {
                     "pvf_type": "string",
-                    "pvf_value": "robotont_sim_2"
+                    "pvf_value": "robotont_sim_1"
                 }
             }
         }

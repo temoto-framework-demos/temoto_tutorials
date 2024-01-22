@@ -21,7 +21,6 @@ bool initialize(const std::string& robot_ns)
 {   
   std::string action_client = robot_ns + "/move_base";
   ac_.reset(new MoveBaseClient(action_client, true));
-  std::cout << "\033[1;31m my_navigation_feature initialized succesfully\033[0m\n" << std::endl;
   progress = 0;
   stop_requested = false;
   return true;
@@ -61,12 +60,12 @@ bool sendGoal(RmNavigationGoal goal)
   }      
   else
   {
-    std::cout << "\033[1;33m The base failed to move for some reason\033[0m" <<std::endl;
+    std::cout << "\033[1;33m The mobile base failed to move for some reason\033[0m" <<std::endl;
   }
       
   if (!task_finished)
   {
-    std::cout << "\033[1;33m Base could not finish the task\033[0m" << std::endl;
+    std::cout << "\033[1;33m The mobile base could not finish the task\033[0m" << std::endl;
     // return false;
   }
 
@@ -101,7 +100,7 @@ bool cancelGoal()
 
 bool deinitialize()
 {
-  std::cout << "\033[1;31m my_navigation_feature_1 deinitialized succesfully\033[0m\n" << std::endl;
+  std::cout << "\033[1;31m my_navigation_feature_1 deinitialized succesfully\033[0m" << std::endl;
   return true;
 }
 

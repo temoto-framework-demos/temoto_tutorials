@@ -31,10 +31,7 @@
           type="temoto_robot_manager" 
           output="screen" 
           respawn="$(arg respawn_nodes)"
-          launch-prefix="gdb -ex run --args"
           args="--config-base-path $(arg robot_config_base_path)"/>
-
-          <!-- for gdb   xterm -e gdb - -args  -->
 
     <node pkg="temoto_visualization_manager" 
           type="temoto_visualization_manager" 
