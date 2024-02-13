@@ -50,9 +50,10 @@ void executeTemotoAction()
   target_pose.pose.position.y = in_param_pose_2d_y;
   target_pose.pose.orientation = tf::createQuaternionMsgFromRollPitchYaw(0, 0, in_param_pose_2d_yaw);
 
-  temoto_robot_manager::RobotNavigationGoal navigation_request;
+  temoto_robot_manager::NavigationGoal navigation_request;
   navigation_request.request.robot_name = in_param_robot_name;
   navigation_request.request.target_pose = target_pose;
+  navigation_request.request.priority = 5;
 
   bool goal_reached{false};
   unsigned int retry_count{0};
@@ -62,7 +63,6 @@ void executeTemotoAction()
   {
     TEMOTO_INFO_STREAM_("Sending a navigation goal to " << in_param_robot_name << " ...");
     rmi_.navigationGoal(navigation_request);
-    // rmi_.navigationGoal(in_param_robot_name, target_pose);
     TEMOTO_INFO_STREAM_("Done navigating");
     goal_reached = true;
   }

@@ -23,15 +23,13 @@ try
   /*
    * INVOKE THE NAVIGATION FEATURE
    */
-  temoto_robot_manager::RobotNavigationGoal navigation_request;
+  temoto_robot_manager::NavigationGoal navigation_request;
   navigation_request.request.robot_name = robot_name;
   navigation_request.request.target_pose.header.frame_id = "map";
   navigation_request.request.target_pose.pose.position.x = 5.0;
   navigation_request.request.target_pose.pose.orientation.w = 1.0;
-    
+  navigation_request.request.priority = 5;
   std::cout << "Invoking the navigation feature ..." << std::endl;
-  // rmi.navigationGoal(navigation_request.request.robot_name,
-  //                    navigation_request.request.target_pose);
 
   if (rmi.navigationGoal(navigation_request))
   {
@@ -45,10 +43,25 @@ try
   
 
   /*
-   * PRE-EMPT THE CUSTOM FEATURE
+   * CANCEL NAVIGATION GOAL
    */
-  std::cout << "Cancel goal ..." << std::endl;
-  if (rmi.cancelNavigationGoal(robot_name))
+  // temoto_robot_manager::CancelNavigationGoal cancel_goal;
+  // cancel_goal.request.robot_name = robot_name;
+  // cancel_goal.request.priority = 10;
+  // cancel_goal.request.request_id = navigation_request.response;
+  // std::cout << "Cancel goal ..." << std::endl;
+  // if (rmi.cancelNavigationGoal(cancel_goal))
+  // {
+  //   std::cout << "Cancel goal successfully\n" << std::endl;
+  //   ros::Duration(4).sleep();
+  // }
+  // else
+  // {
+  //   std::cout << "Unable to cancel goal" << std::endl;
+  //   return 1;
+  // }
+
+  if (rmi.cancelNavigationGoal(navigation_request.response.request_id))
   {
     std::cout << "Cancel goal successfully\n" << std::endl;
     ros::Duration(4).sleep();

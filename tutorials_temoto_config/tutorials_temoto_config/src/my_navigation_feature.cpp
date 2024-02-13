@@ -57,7 +57,7 @@ bool sendGoal(RmNavigationGoal goal)
   {
     std::cout << "\033[1;33m The base moved\033[0m" <<std::endl;
     task_finished = true;
-  }      
+  }
   else
   {
     std::cout << "\033[1;33m The mobile base failed to move for some reason\033[0m" <<std::endl;
